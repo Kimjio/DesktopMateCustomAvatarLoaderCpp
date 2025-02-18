@@ -282,6 +282,8 @@ static BOOL WINAPI ShowWindow_hook(
 	_In_ HWND hWnd,
 	_In_ int nCmdShow)
 {
+	// Remove from taskbar
+	SetWindowLongPtrW(hWnd, GWL_EXSTYLE, GetWindowLongW(hWnd, GWL_EXSTYLE) & ~WS_EX_APPWINDOW | WS_EX_TOOLWINDOW);
 
 	oldWndProcPtr = reinterpret_cast<WNDPROC>(SetWindowLongPtrW(hWnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(WndProc)));
 
